@@ -7,7 +7,7 @@ zone_id = ""
 [build.upload]
 dir="src"
 format = "modules"
-main = "./src/index.js"
+main = "./index.js"
 [[build.upload.rules]]
 type = "ESModule"
 globs = ["**/*.js"]
