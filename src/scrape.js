@@ -30,7 +30,7 @@ export function parseRecipe(htmlString) {
     const recipe = {
       title: getCleanTextContent(card.querySelector('h3')),
       ingredients: description,
-      rating: parseFloat(card.querySelector('[data-rating]').dataset.rating),
+      rating: parseFloat(card.querySelector('[data-rating]')?.dataset?.rating),
       description,
       thumbnail: `${card.querySelector('img').src}?width=300`,
       href: card.querySelector('a').href,
