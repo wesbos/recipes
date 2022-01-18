@@ -1,0 +1,13 @@
+name = "recipes"
+type = "javascript"
+account_id = "1ce2ff3c44486eee64a00ddf867de4e0"
+workers_dev = true
+route = ""
+zone_id = ""
+dir="src"
+[build.upload]
+format = "modules"
+main = "./index.js"
+[[build.upload.rules]]
+type = "ESModule"
+globs = ["**/*.js"]
