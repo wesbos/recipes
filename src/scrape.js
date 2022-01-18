@@ -1,5 +1,4 @@
-import fetch from 'isomorphic-fetch';
-import { JSDOM } from 'jsdom';
+import { parseHTML } from 'linkedom/worker';
 
 const url = `https://www.allrecipes.com/element-api/content-proxy/faceted-searches-submit`;
 
@@ -21,8 +20,8 @@ export async function getRecipe(query = 'pizza') {
   return data.html;
 }
 
-export async function parseRecipe(htmlString) {
-  const { document } = new JSDOM(`<!DOCTYPE html>${htmlString}`).window;
+export function parseRecipe(htmlString) {
+  const { document } = parseHTML(`<!DOCTYPE html>${htmlString}`);
   const cards = document.querySelectorAll('.card');
   const recipes = Array.from(cards).map((card) => {
     const description = getCleanTextContent(
@@ -40,6 +39,7 @@ export async function parseRecipe(htmlString) {
   });
   // console.log(document);
   console.log('', recipes.length);
+  return recipes;
 }
 
 async function test() {
@@ -49,3 +49,5 @@ async function test() {
   await parseRecipe(await getRecipe('beer'));
   await parseRecipe(await getRecipe('pizza'));
 }
+
+// test();

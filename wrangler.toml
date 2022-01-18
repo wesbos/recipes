@@ -1,13 +1,5 @@
-name = "recipes"
-type = "javascript"
-account_id = "1ce2ff3c44486eee64a00ddf867de4e0"
-workers_dev = true
-route = ""
-zone_id = ""
+compatibility_date = "2022-01-18"
+name="recipes"
 [build.upload]
-dir="src"
-format = "modules"
-main = "./index.js"
-[[build.upload.rules]]
-type = "ESModule"
-globs = ["**/*.js"]
+format = 'modules'
+main = './src/index.js'
