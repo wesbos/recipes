@@ -5,7 +5,8 @@ export default {
     console.log('-----------');
     const [, q] = new URLSearchParams(request.url).entries().next().value;
     const recipes = await parseRecipe(await getRecipe(q));
-    return new Response(JSON.stringify(recipes), {
+    console.log(recipes);
+    return new Response(JSON.stringify({ results: recipes }), {
       headers: { 'content-type': 'application/json' },
     });
   },

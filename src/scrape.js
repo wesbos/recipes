@@ -15,7 +15,10 @@ export async function getRecipe(query = 'pizza') {
     console.log('We already have that one');
     return cache.get(query).html;
   }
-  const data = await fetch(`${url}?search=${query}`).then((res) => res.json());
+  const response = await fetch(`${url}?search=${query}`);
+  console.log('response', response);
+  const data = await response.json();
+  console.log(data);
   cache.set(query, data);
   return data.html;
 }
