@@ -8,7 +8,8 @@
     "extends": "wesbos"
   },
   "scripts": {
-    "dev": "wrangler dev src/index.js"
+    "dev": "wrangler dev src/index.js",
+    "publish": "wrangler publish src/index.js"
   },
   "author": "Wes Bos",
   "license": "ISC",
