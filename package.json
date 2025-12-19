@@ -14,30 +14,14 @@
   "author": "Wes Bos",
   "license": "ISC",
   "dependencies": {
-    "@babel/core": "^7.16.7",
-    "@babel/eslint-parser": "^7.16.5",
-    "@babel/preset-react": "^7.16.7",
-    "@types/node": "^16.11.21",
-    "@typescript-eslint/eslint-plugin": "^5.10.0",
-    "@typescript-eslint/parser": "^5.10.0",
-    "eslint": "^8.7.0",
-    "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-airbnb-typescript": "^16.1.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-config-wesbos": "^3.0.2",
-    "eslint-plugin-html": "^6.2.0",
-    "eslint-plugin-import": "^2.25.4",
-    "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-react": "^7.28.0",
-    "eslint-plugin-react-hooks": "^4.3.0",
-    "isomorphic-fetch": "^3.0.0",
-    "jsdom": "^19.0.0",
-    "linkedom": "^0.13.0",
-    "prettier": "^2.5.1",
-    "typescript": "^4.5.4"
+    "@types/node": "^25.0.3",
+    "linkedom": "^0.18.12",
+    "prettier": "^3.7.4",
+    "typescript": "^5.9.3",
+    "wrangler": "^4.56.0"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^3.3.1"
-  }
+    "@cloudflare/workers-types": "^4.20251219.0"
+  },
+  "packageManager": "pnpm@9.10.0+sha1.216899f511c8dfde183c7cb50b69009c779534a8"
 }

@@ -1,6 +1,6 @@
 import { parseHTML } from 'linkedom/worker';
 
-const url = `https://www.allrecipes.com/element-api/content-proxy/faceted-searches-submit`;
+const url = `https://www.allrecipes.com/search`;
 
 const cache = new Map();
 
@@ -8,40 +8,42 @@ function getCleanTextContent(element) {
   return element.textContent.replace('\n', '').trim();
 }
 
+const enableCache = true;
+
 export async function getRecipe(query = 'pizza') {
   console.log(`Searching for ${query}`);
   // Check for cache
-  if (cache.has(query)) {
+  if (enableCache && cache.has(query)) {
     console.log('We already have that one');
     return cache.get(query).html;
   }
-  const response = await fetch(`${url}?search=${query}`);
-  console.log('response', response);
-  const data = await response.json();
-  console.log(data);
-  cache.set(query, data);
-  return data.html;
+  const response = await fetch(`${url}?q=${query}`);
+  const data = await response.text();
+  if (enableCache) {
+    cache.set(query, data);
+  }
+  return data;
 }
 
 export function parseRecipe(htmlString) {
   const { document } = parseHTML(`<!DOCTYPE html>${htmlString}`);
-  const cards = document.querySelectorAll('.card');
+  const cards = document.querySelectorAll('a[data-doc-id]');
   const recipes = Array.from(cards).map((card) => {
-    const description = getCleanTextContent(
-      card.querySelector('.card__summary')
-    );
+    const img = card.querySelector('img');
+    const description = img.alt;
+    const fullStars = card.querySelectorAll('.icon-star').length;
+    const halfStars = card.querySelectorAll('.icon-star-half').length;
+    const rating = (fullStars + halfStars / 2).toFixed(1);
     const recipe = {
-      title: getCleanTextContent(card.querySelector('h3')),
-      ingredients: description,
-      rating: parseFloat(card.querySelector('[data-rating]')?.dataset?.rating),
+      title: getCleanTextContent(card.querySelector('.card__title')),
+      ingredients: description, // todo
+      rating,
       description,
-      thumbnail: `${card.querySelector('img').src}?width=300`,
-      href: card.querySelector('a').href,
+      thumbnail: img.dataset.src,
+      href: card.href,
     };
     return recipe;
   });
-  // console.log(document);
-  console.log('', recipes.length);
   return recipes;
 }
 

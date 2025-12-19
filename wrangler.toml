@@ -1,5 +1,0 @@
-compatibility_date = "2022-01-18"
-name="recipes"
-[build.upload]
-format = 'modules'
-main = './src/index.js'
